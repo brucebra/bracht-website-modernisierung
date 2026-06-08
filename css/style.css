@@ -1,0 +1,196 @@
+/* ==========================================================================
+   BRACHT + PARTNER ARCHITEKTEN - CENTRAL RESPONSIVE GRID (A-Z Sortierung)
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+main {
+    width: 100%;
+}
+
+/* ========================================================================== */
+/* DESIGN-KLASSEN (A-Z) */
+/* ========================================================================== */
+
+.active {
+    /* Wird per JavaScript gesetzt */
+}
+
+.brand-logo {
+    display: block;
+    width: 279px;
+}
+
+.fliesstext {
+    color: #000000;
+    font-size: 0.85rem;
+    font-weight: normal;
+    margin: 0 0 8px 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.logo-container {
+    height: 105px;
+    padding-top: 54px;
+}
+
+.main-image-box {
+    width: 372px;
+}
+
+.main-image-box img {
+    border: none;
+    display: block;
+    height: 153px;
+    object-fit: cover;
+    width: 372px;
+    cursor: pointer;
+}
+
+.main-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 15px;
+}
+
+.menu-btn {
+    display: block;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.menu-btn img {
+    display: block;
+    border: none;
+    height: 16px !important;
+    min-height: 16px !important;
+    min-width: 116px !important;
+    width: 116px !important;
+}
+
+.menu-btn img.img-red {
+    display: none;
+}
+
+/* Hover-Tausch (Mouseover) - Black ausblenden, Red anzeigen */
+.menu-btn:hover img.img-black {
+    display: none;
+}
+.menu-btn:hover img.img-red {
+    display: inline-block;
+}
+
+/* Aktiv-Zustand (Fester roter Schalter) */
+.menu-btn.active img.img-black {
+    display: none;
+}
+.menu-btn.active img.img-red {
+    display: inline-block;
+}
+
+.middle-content-zone {
+    align-items: start;
+    display: flex;
+    gap: 0;
+    margin-top: 25px;
+    max-height: 60vh;
+    overflow-y: auto;
+    width: 738px;
+}
+
+.mini-thumbnail {
+    display: block;
+    height: 75px;
+    margin: 1px;
+    object-fit: cover;
+    width: 33px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.mini-thumbnail:hover {
+    border-color: #cc0000;
+}
+
+.site-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding-top: 25px;
+    width: 738px;
+}
+
+.sub-column {
+    display: block;
+    width: 116px;
+    padding-left: 5px;
+}
+
+.sub-btn-align {
+    margin-top: 69px !important;
+}
+
+.subsub-column {
+    display: block;
+    width: 340px;
+    padding-left: 5px;
+}
+
+.subsub-matrix {
+    display: grid;
+    grid-template-columns: 116px 116px;
+    grid-auto-rows: 16px;
+    gap: 0;
+    margin-top: 69px;
+    width: 232px;
+}
+
+.text-box {
+    padding-right: 15px;
+    width: 262px;
+}
+
+.thumbs-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    width: 104px;
+}
+
+.top-navigation-area {
+    background-color: #f4f2f3;
+    display: grid;
+    grid-template-columns: 282px 116px 340px;
+    height: 175px;
+    width: 738px;
+}
+
+/* ========================================================================== */
+/* BILDMITRAHMEN - Randbehandlung für Mini-Thumbnails */
+/* ========================================================================== */
+
+.bildMitRahmen {
+    border: 1px solid #999;
+}
