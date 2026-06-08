@@ -47,31 +47,33 @@ def load_mapping_from_csv(csv_path):
     
     return mapping
 
-def load_menu_architecture(menu_path):
-    """
-    Lädt Menue_Architektur.csv und strukturiert das 3-Ebenen-Menü.
-    Rückgabe: Dictionary mit Menü-Struktur
-    """
-    menu_structure = {
-        'p': {},  # Projekte
-        'i': {},  # Innen
-        'a': {},  # Außen
-        'c': {}   # Kontakt
-    }
-    
-    # Hier würde die CSV geladen
-    # Für Phase 1 verwenden wir eine statische Struktur
-    # Die wird später dynamisch aus CSV gebaut
-    
-    return menu_structure
-
 def extract_content_from_source(html_content):
     """
     Extrahiert aus der alten Rumpfdatei:
+    - Projekttitel (aus <p class="Title">)
     - Text (alles in <p class="fliesstext">)
     - Miniaturen (pics/projects/minis/)
     - Hauptbild (showcontainer Bild)
     """
+    
+    # Projekttitel extrahieren
+    title_match = re.search(
+        r'<p[^>]*class="Title"[^>]*>(.*?)</p>',
+        html_content,
+        re.DOTALL | re.IGNORECASE
+    )
+    
+    project_title = ""
+    if title_match:
+        title_raw = title_match.group(1)
+        # <br> durch Leerzeichen ersetzen
+        title_raw = re.sub(r'<br\s*/?>', ' ', title_raw, flags=re.IGNORECASE)
+        # Alle anderen Tags entfernen
+        project_title = re.sub(r'<[^>]+>', '', title_raw).strip()
+        # HTML-Entities dekodieren
+        project_title = project_title.replace('&uuml;', 'ü')
+        project_title = project_title.replace('&auml;', 'ä')
+        project_title = project_title.replace('&ouml;', 'ö')
     
     # Text extrahieren
     text_blocks = re.findall(
@@ -110,7 +112,7 @@ def extract_content_from_source(html_content):
     
     main_img = main_match.group(1).strip() if main_match else "pics/grau.jpg"
     
-    return clean_text, minis, main_img
+    return project_title, clean_text, minis, main_img
 
 # ============================================================================
 # HTML-GENERATOR
@@ -207,7 +209,7 @@ def generate_html(old_filename, menu_code):
     with open(old_path, 'r', encoding='iso-8859-1') as f:
         old_content = f.read()
     
-    text, minis, main_img = extract_content_from_source(old_content)
+    project_title, text, minis, main_img = extract_content_from_source(old_content)
     
     # Menü generieren
     sub_html, subsub_html = build_menu_html(menu_code)
@@ -229,6 +231,11 @@ def generate_html(old_filename, menu_code):
         if line:
             text_html += f'                    <p class="fliesstext">{line}</p>\n'
     
+    # Projekttitel HTML
+    title_html = ""
+    if project_title:
+        title_html = f'                <span class="title-text">{project_title}</span>'
+    
     # Platzhalter ersetzen
     new_html = template
     new_html = new_html.replace(
@@ -238,6 +245,10 @@ def generate_html(old_filename, menu_code):
     new_html = new_html.replace(
         '<!-- PLATZHALTER_SUBSUB_MENU -->',
         subsub_html
+    )
+    new_html = new_html.replace(
+        '<!-- PLATZHALTER_PROJEKT_TITEL -->',
+        title_html
     )
     new_html = new_html.replace(
         '<!-- PLATZHALTER_TEXT -->',
@@ -253,7 +264,8 @@ def generate_html(old_filename, menu_code):
     )
     
     # MENU_DATA ins HTML schreiben (für JavaScript)
-    menu_data_js = f"<script>const MENU_DATA = {{'hausboot': '{menu_code}'}};</script>"
+    filename_without_ext = old_filename.replace('.htm', '').replace('.html', '').lower()
+    menu_data_js = f"<script>const MENU_DATA = {{'{filename_without_ext}': '{menu_code}'}};</script>"
     new_html = new_html.replace('</head>', f'{menu_data_js}\n</head>')
     
     return new_html, None

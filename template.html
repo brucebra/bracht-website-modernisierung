@@ -7,16 +7,15 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="js/main.js"></script>
 </head>
-<body background="pics/background.jpg">
+<body>
 
-<div class="site-container">
-
-    <!-- ==========================================================================
-         OBERER BEREICH: DIE DREI-EBENEN MENÜ-STRUKTUR
-         ========================================================================== -->
-    <div class="top-navigation-area">
+<!-- ==========================================================================
+     FESTER HEADER (grauer Balken mit Hintergrund)
+     ========================================================================== -->
+<header class="fixed-header" style="background-image: url(pics/grau.jpg)">
+    <div class="header-top-area">
         
-        <!-- SPALTE 1: HAUPTMENÜ (p, i, a, c) -->
+        <!-- SPALTE 1: LOGO + HAUPTMENÜ -->
         <div class="menu-column">
             <div class="logo-container">
                 <img src="pics/Bracht_und_Partner.gif" alt="Bracht + Partner Logo" class="brand-logo">
@@ -41,23 +40,30 @@
             </nav>
         </div>
         
-        <!-- SPALTE 2: SUB-MENÜ (dynamisch gefüllt basierend auf Hauptmenü) -->
+        <!-- SPALTE 2: SUB-MENÜ -->
         <div class="sub-column hidden" id="sub-menu">
             <!-- PLATZHALTER_SUB_MENU -->
         </div>
         
-        <!-- SPALTE 3: SUBSUB-MENÜ (dynamisch gefüllt basierend auf Sub) -->
+        <!-- SPALTE 3: SUBSUB-MENÜ -->
         <div class="subsub-column hidden" id="subsub-menu">
             <div class="subsub-matrix">
                 <!-- PLATZHALTER_SUBSUB_MENU -->
             </div>
         </div>
     </div>
+    
+    <!-- Projekttitel in grauem Balken -->
+    <div class="title-container">
+        <!-- PLATZHALTER_PROJEKT_TITEL -->
+    </div>
+</header>
 
-    <!-- ==========================================================================
-         UNTERER BEREICH: DAS INHALTSFELD (Text, Thumbnails, Hauptbild)
-         ========================================================================== -->
-    <main class="middle-content-zone">
+<!-- ==========================================================================
+     SCROLLBARER CONTENT-BEREICH
+     ========================================================================== -->
+<main class="scrollable-content">
+    <div class="middle-content-zone">
         <div class="text-box">
             <!-- PLATZHALTER_TEXT -->
         </div>
@@ -67,9 +73,8 @@
         <div class="main-image-box">
             <!-- PLATZHALTER_HAUPTBILD -->
         </div>
-    </main>
-
-</div>
+    </div>
+</main>
 
 </body>
 </html>

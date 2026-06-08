@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BRACHT + PARTNER ARCHITEKTEN - CENTRAL RESPONSIVE GRID (A-Z Sortierung)
+   BRACHT + PARTNER ARCHITEKTEN - RESPONSIVE GRID MIT FIXED HEADER (A-Z)
    ========================================================================== */
 
 * {
@@ -18,10 +18,8 @@ body {
     color: #000000;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     line-height: 1.5;
-}
-
-main {
-    width: 100%;
+    /* Platz für den festen Header */
+    padding-top: 175px;
 }
 
 /* ========================================================================== */
@@ -37,11 +35,29 @@ main {
     width: 279px;
 }
 
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-size: cover;
+    background-position: center;
+}
+
 .fliesstext {
     color: #000000;
     font-size: 0.85rem;
     font-weight: normal;
     margin: 0 0 8px 0;
+}
+
+.header-top-area {
+    background-color: #f4f2f3;
+    display: grid;
+    grid-template-columns: 282px 116px 340px;
+    height: 155px;
+    width: 100%;
 }
 
 .hidden {
@@ -114,9 +130,7 @@ main {
     align-items: start;
     display: flex;
     gap: 0;
-    margin-top: 25px;
-    max-height: 60vh;
-    overflow-y: auto;
+    margin-top: 0;
     width: 738px;
 }
 
@@ -134,12 +148,11 @@ main {
     border-color: #cc0000;
 }
 
-.site-container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    padding-top: 25px;
-    width: 738px;
+.scrollable-content {
+    width: 100%;
+    max-height: calc(100vh - 175px);
+    overflow-y: auto;
+    padding: 25px 0 0 0;
 }
 
 .sub-column {
@@ -172,19 +185,28 @@ main {
     width: 262px;
 }
 
+.title-container {
+    background-color: #f4f2f3;
+    height: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 262px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.title-text {
+    color: #000000;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
 .thumbs-box {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
     width: 104px;
-}
-
-.top-navigation-area {
-    background-color: #f4f2f3;
-    display: grid;
-    grid-template-columns: 282px 116px 340px;
-    height: 175px;
-    width: 738px;
 }
 
 /* ========================================================================== */
